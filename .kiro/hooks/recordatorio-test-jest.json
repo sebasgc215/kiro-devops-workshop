@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Recordatorio de Test Jest",
+      "trigger": "PostFileCreate",
+      "matcher": "src/.*\\.js$",
+      "action": {
+        "type": "agent",
+        "prompt": "El usuario acaba de crear un archivo .js en la carpeta src/. Recuérdale que debe crear el test correspondiente en la carpeta tests/ usando Jest. Menciona el nombre del archivo que debería crear siguiendo la convención `tests/<nombre-del-archivo>.test.js`. Sé breve y directo."
+      }
+    }
+  ]
+}

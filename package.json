@@ -1,0 +1,27 @@
+{
+  "name": "kiro-devops-workshop",
+  "version": "1.0.0",
+  "description": "Kiro workshop Carvajal",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/**/*.js",
+    "test": "jest --coverage",
+    "build": "node --check src/*.js && echo \"Build OK\""
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebasgc215/kiro-devops-workshop.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sebasgc215/kiro-devops-workshop/issues"
+  },
+  "homepage": "https://github.com/sebasgc215/kiro-devops-workshop#readme"
+}

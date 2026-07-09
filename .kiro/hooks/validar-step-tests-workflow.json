@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Validar Step de Tests en Workflows",
+      "trigger": "PreToolUse",
+      "matcher": "fs_write|str_replace|fs_append",
+      "action": {
+        "type": "command",
+        "command": "node -e \"\nconst fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8');\nconst data = JSON.parse(input);\n\n// Solo validar si el archivo destino es un workflow de GitHub Actions\nconst path = data.tool_input && (data.tool_input.path || '');\nif (!path.includes('.github/workflows/')) {\n  process.exit(0);\n}\n\n// Obtener el contenido que se va a escribir\nconst content = data.tool_input.text || data.tool_input.newStr || data.tool_input.content || '';\n\n// Verificar si incluye un step de tests (npm test, jest, run: test, etc.)\nconst hasTestStep = /npm(\\s+run\\s+)?\\s*test|jest|yarn\\s+test|run:\\s*(npm\\s+test|jest|yarn\\s+test)/.test(content);\n\nif (!hasTestStep) {\n  console.error('ERROR: El workflow no incluye un step de pruebas (tests).');\n  console.error('Segun los estandares del equipo, todos los workflows deben incluir lint, test y build.');\n  console.error('Agrega un job o step que ejecute: npm test (o equivalente con Jest).');\n  process.exit(2);\n}\n\nprocess.exit(0);\n\"\n"
+      }
+    }
+  ]
+}
